@@ -8,7 +8,7 @@ public class Player2Health : MonoBehaviour
 {
     public int startingHealth = 100;
     public int currentHealth;
-    public Slider healthSlider;
+    Slider healthSlider;
     public Image damageImage;
     public AudioClip deathClip;
     public float flashSpeed = 5f;
@@ -30,6 +30,7 @@ public class Player2Health : MonoBehaviour
         playerMovement = GetComponent<PlayerMovement>();
         playerShooting = GetComponentInChildren<PlayerShooting>();
         currentHealth = startingHealth;
+        //healthSlider = GameObject.FindGameObjectWithTag("Player2Slider").GetComponent<Slider>();
     }
 
 

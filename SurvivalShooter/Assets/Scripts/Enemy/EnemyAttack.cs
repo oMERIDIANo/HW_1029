@@ -23,7 +23,7 @@ public class EnemyAttack : MonoBehaviour
     void Awake ()
     {
         player = GameObject.FindGameObjectWithTag ("Player");
-        spawnPlayer2 = player.GetComponent<SpawnPlayer2>();
+        spawnPlayer2 = GameObject.Find("Player2SpawnPoint").GetComponent<SpawnPlayer2>();
         playerHealth = player.GetComponent <PlayerHealth> ();
         enemyHealth = GetComponent<EnemyHealth>();
         anim = GetComponent <Animator> ();

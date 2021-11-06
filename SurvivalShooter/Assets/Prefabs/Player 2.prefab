@@ -5255,7 +5255,7 @@ GameObject:
   - component: {fileID: 6243020768226681034}
   - component: {fileID: 6287800019273184726}
   - component: {fileID: 6305858997716838348}
-  - component: {fileID: 6338604660483109618}
+  - component: {fileID: 1364891246238489945}
   - component: {fileID: -3414292933312344133}
   m_Layer: 0
   m_Name: Player 2
@@ -5426,7 +5426,7 @@ CapsuleCollider:
   m_Height: 1.2
   m_Direction: 1
   m_Center: {x: 0.2, y: 0.6, z: 0}
---- !u!114 &6338604660483109618
+--- !u!114 &1364891246238489945
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5454,7 +5454,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startingHealth: 100
   currentHealth: 100
-  healthSlider: {fileID: 0}
   damageImage: {fileID: 0}
   deathClip: {fileID: 8300000, guid: d36a393bca4582043982db9089e1694f, type: 3}
   flashSpeed: 5

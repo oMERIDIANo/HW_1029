@@ -4,8 +4,9 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Player 2
   - MainCamera2
+  - Player2Slider
+  - Player 2
   layers:
   - Default
   - TransparentFX

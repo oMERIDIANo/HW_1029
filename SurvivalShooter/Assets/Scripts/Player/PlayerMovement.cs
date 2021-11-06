@@ -3,7 +3,6 @@
 public class PlayerMovement : MonoBehaviour
 {
 	public float speed = 6f;
-
 	private Vector3 movement;
 	private Animator anim;
 	private Rigidbody playerRigidbody;
@@ -35,7 +34,7 @@ public class PlayerMovement : MonoBehaviour
 		movement.Set(h, 0f, v);
 		movement = movement.normalized * speed * Time.deltaTime;
 
-		playerRigidbody.MovePosition(transform.position + movement);
+		playerRigidbody.MovePosition(transform.position + movement);	
 	}
 
 	void Turning()

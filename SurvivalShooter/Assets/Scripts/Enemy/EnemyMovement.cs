@@ -19,7 +19,7 @@ public class EnemyMovement : MonoBehaviour
     {
         player = GameObject.FindGameObjectWithTag ("Player").transform;
         playerHealth = player.GetComponent <PlayerHealth> ();
-        spawnPlayer2 = player.GetComponent<SpawnPlayer2>();
+        spawnPlayer2 = GameObject.Find("Player2SpawnPoint").GetComponent<SpawnPlayer2>();
         enemyHealth = GetComponent <EnemyHealth> ();
         nav = GetComponent <UnityEngine.AI.NavMeshAgent> ();
     }
@@ -52,13 +52,11 @@ public class EnemyMovement : MonoBehaviour
 
             if(playerHealth.currentHealth <=0 && player2Health.currentHealth > 0)
             {
-                Debug.Log("Player 1 is dead. Following Player 2");
                 nav.SetDestination(player2.position);
             }
 
-            if (player2Health.currentHealth <= 0 && playerHealth.currentHealth > 0)
+            else if (player2Health.currentHealth <= 0 && playerHealth.currentHealth > 0)
             {
-                Debug.Log("Player 2 is dead. Following Player 1");
                 nav.SetDestination(player.position);
             }
         }
