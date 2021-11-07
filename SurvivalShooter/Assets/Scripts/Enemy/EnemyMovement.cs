@@ -29,33 +29,23 @@ public class EnemyMovement : MonoBehaviour
     {
         playerDistance = Vector3.Distance(player.transform.position, transform.position);
 
-        if (enemyHealth.currentHealth > 0 && playerHealth.currentHealth > 0)
+        if (enemyHealth.currentHealth > 0 && playerHealth.currentHealth > 0 && spawnPlayer2.player2 == null)
         {
             nav.SetDestination(player.position);
         }
 
-        if (spawnPlayer2.isPlayer2Active == true)
+        if (spawnPlayer2.player2 != null)
         {
             player2 = GameObject.FindGameObjectWithTag("Player 2").transform;
             player2Health = player2.GetComponent<Player2Health>();
 
             player2Distance = Vector3.Distance(player2.transform.position, transform.position);
 
-            if(player2Distance < playerDistance)
+            if(player2Distance < playerDistance || playerHealth.currentHealth <= 0 && player2Health.currentHealth > 0)
             {
                 nav.SetDestination(player2.position);
             }
             else
-            {
-                nav.SetDestination(player.position);
-            }
-
-            if(playerHealth.currentHealth <=0 && player2Health.currentHealth > 0)
-            {
-                nav.SetDestination(player2.position);
-            }
-
-            else if (player2Health.currentHealth <= 0 && playerHealth.currentHealth > 0)
             {
                 nav.SetDestination(player.position);
             }

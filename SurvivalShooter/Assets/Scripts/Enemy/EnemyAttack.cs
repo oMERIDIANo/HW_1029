@@ -75,13 +75,21 @@ public class EnemyAttack : MonoBehaviour
             anim.SetTrigger ("PlayerDead");
         }
 
-        if (spawnPlayer2.isPlayer2Active == true)
+        if (spawnPlayer2.player2 != null)
         {
             player2 = GameObject.FindGameObjectWithTag("Player 2");
 
             player2Health = player2.GetComponent<Player2Health>();
 
-            if (player2Health.currentHealth <= 0)
+            if (player2Health.currentHealth <= 0 && playerHealth.currentHealth <= 0)
+            {
+                anim.SetTrigger("PlayerDead");
+            }
+        }
+
+        else
+        {
+            if(playerHealth.currentHealth <= 0)
             {
                 anim.SetTrigger("PlayerDead");
             }

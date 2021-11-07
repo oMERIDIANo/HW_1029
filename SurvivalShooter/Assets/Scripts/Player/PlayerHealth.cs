@@ -22,6 +22,7 @@ public class PlayerHealth : MonoBehaviour
     public bool isDead;
     bool damaged;
 
+    public SpawnPlayer2 spawnPlayer2;
     public Player2Health player2Health;
 
     void Awake ()
@@ -38,11 +39,11 @@ public class PlayerHealth : MonoBehaviour
     {
         if(damaged)
         {
-            //damageImage.color = flashColour;
+            damageImage.color = flashColour;
         }
         else
         {
-            //damageImage.color = Color.Lerp (damageImage.color, Color.clear, flashSpeed * Time.deltaTime);
+            damageImage.color = Color.Lerp (damageImage.color, Color.clear, flashSpeed * Time.deltaTime);
         }
         damaged = false;
     }
@@ -82,6 +83,20 @@ public class PlayerHealth : MonoBehaviour
 
     public void RestartLevel ()
     {
-        SceneManager.LoadScene(0);
+        if(spawnPlayer2.player2 != null)
+        {
+            if(currentHealth > 0 && player2Health.currentHealth <= 0)
+            {
+                Debug.Log("Player 1 is still alive!");
+            }
+            else if(currentHealth <= 0 && player2Health.currentHealth <= 0)
+            {
+                SceneManager.LoadScene(0);
+            }
+        }
+        else
+        {
+            SceneManager.LoadScene(0);
+        }
     }
 }

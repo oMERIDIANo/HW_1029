@@ -8,8 +8,8 @@ public class Player2Health : MonoBehaviour
 {
     public int startingHealth = 100;
     public int currentHealth;
-    Slider healthSlider;
-    public Image damageImage;
+    public Slider healthSlider;
+    Image damageImage;
     public AudioClip deathClip;
     public float flashSpeed = 5f;
     public Color flashColour = new Color(1f, 0f, 0f, 0.1f);
@@ -21,7 +21,7 @@ public class Player2Health : MonoBehaviour
     public bool isDead;
     bool damaged;
 
-    public PlayerHealth playerHealth;
+    PlayerHealth playerHealth;
 
     void Awake()
     {
@@ -30,7 +30,8 @@ public class Player2Health : MonoBehaviour
         playerMovement = GetComponent<PlayerMovement>();
         playerShooting = GetComponentInChildren<PlayerShooting>();
         currentHealth = startingHealth;
-        //healthSlider = GameObject.FindGameObjectWithTag("Player2Slider").GetComponent<Slider>();
+        damageImage = GameObject.Find("DamageImage").GetComponent<Image>();
+        playerHealth = GameObject.Find("Player").GetComponent<PlayerHealth>();
     }
 
 
@@ -38,11 +39,11 @@ public class Player2Health : MonoBehaviour
     {
         if (damaged)
         {
-            //damageImage.color = flashColour;
+            damageImage.color = flashColour;
         }
         else
         {
-            //damageImage.color = Color.Lerp (damageImage.color, Color.clear, flashSpeed * Time.deltaTime);
+            damageImage.color = Color.Lerp (damageImage.color, Color.clear, flashSpeed * Time.deltaTime);
         }
         damaged = false;
     }
@@ -54,7 +55,7 @@ public class Player2Health : MonoBehaviour
 
         currentHealth -= amount;
 
-        //healthSlider.value = currentHealth;
+        healthSlider.value = currentHealth;
 
         playerAudio.Play();
 
@@ -82,6 +83,13 @@ public class Player2Health : MonoBehaviour
 
     public void RestartLevel()
     {
-        SceneManager.LoadScene(0);
+        if(currentHealth > 0 && playerHealth.currentHealth <= 0)
+        {
+            Debug.Log("Player 2 is still alive!");
+        }
+        else if(currentHealth <= 0 && playerHealth.currentHealth <= 0)
+        {
+            SceneManager.LoadScene(0);
+        }
     }
 }

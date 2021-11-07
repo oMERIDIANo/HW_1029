@@ -505,7 +505,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerPrefab: {fileID: 6226107009136025934, guid: 81fe1502438881346b995c89aa9fa3dc,
     type: 3}
-  isPlayer2Active: 0
+  player2: {fileID: 0}
+  cam2: {fileID: 869438099}
+  smoothing: 5
+  player2Health: {fileID: -3414292933312344133, guid: 81fe1502438881346b995c89aa9fa3dc,
+    type: 3}
 --- !u!1 &500463516
 GameObject:
   m_ObjectHideFlags: 0
@@ -1289,12 +1293,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9c9e0011c2ed97428a4efc03b455359, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnPlayer2: {fileID: 0}
-  player2Health: {fileID: -3414292933312344133, guid: 81fe1502438881346b995c89aa9fa3dc,
-    type: 3}
-  playerHealth: {fileID: 114762724205432510, guid: 9e3e72cd89ef44f97afe08f9baaabc18,
-    type: 3}
+  playerHealth: {fileID: 1299572197}
   restartDelay: 5
+  spawnPlayer2: {fileID: 489786881}
 --- !u!95 &1114380159
 Animator:
   serializedVersion: 3
@@ -1599,6 +1600,11 @@ PrefabInstance:
       propertyPath: healthSlider
       value: 
       objectReference: {fileID: 604563092}
+    - target: {fileID: 114762724205432510, guid: 9e3e72cd89ef44f97afe08f9baaabc18,
+        type: 3}
+      propertyPath: spawnPlayer2
+      value: 
+      objectReference: {fileID: 489786881}
     - target: {fileID: 114762724205432510, guid: 9e3e72cd89ef44f97afe08f9baaabc18,
         type: 3}
       propertyPath: player2Health

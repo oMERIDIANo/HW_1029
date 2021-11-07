@@ -5,18 +5,24 @@ public class PlayerMovement : MonoBehaviour
 	public float speed = 6f;
 	private Vector3 movement;
 	private Animator anim;
-	private Rigidbody playerRigidbody;
+	Rigidbody playerRigidbody;
+	private Rigidbody player2Rigidbody;
+	SpawnPlayer2 spawnPlayer2;
 	private int floorMask;
 	private float camRayLength = 100f;
 
 	[SerializeField]
 	int playerIndex = 1;
 
+	[SerializeField]
+	float RotationSpeed;
+
 	void Awake()
 	{
 		floorMask = LayerMask.GetMask("Floor");
 		anim = GetComponent<Animator>();
 		playerRigidbody = GetComponent<Rigidbody>();
+		spawnPlayer2 = GameObject.Find("Player2SpawnPoint").GetComponent<SpawnPlayer2>();
 	}
 
 	void FixedUpdate()
@@ -39,15 +45,43 @@ public class PlayerMovement : MonoBehaviour
 
 	void Turning()
 	{
-		Ray camRay = Camera.main.ScreenPointToRay(Input.mousePosition);
-		RaycastHit floorHit;
+		//rotate Player 1
+		if(spawnPlayer2.player2 == null)
+        {
+			Ray camRay = Camera.main.ScreenPointToRay(Input.mousePosition);
+			RaycastHit floorHit;
 
-		if (Physics.Raycast(camRay, out floorHit, camRayLength, floorMask)) {
-			Vector3 playerToMouse = floorHit.point - transform.position;
-			playerToMouse.y = 0f;
+			if (Physics.Raycast(camRay, out floorHit, camRayLength, floorMask))
+			{
+				Vector3 playerToMouse = floorHit.point - transform.position;
+				playerToMouse.y = 0f;
 
-			Quaternion newRotation = Quaternion.LookRotation(playerToMouse);
-			playerRigidbody.MoveRotation(newRotation);
+				Quaternion newRotation = Quaternion.LookRotation(playerToMouse);
+				playerRigidbody.MoveRotation(newRotation);
+			}
+		}
+
+		//rotate Player 2
+		if (spawnPlayer2.player2 != null)
+		{
+			Ray camRay = Camera.main.ScreenPointToRay(Input.mousePosition);
+			RaycastHit floorHit;
+			Rigidbody player1RigidBody = GameObject.Find("Player").GetComponent<Rigidbody>();
+
+			if (Physics.Raycast(camRay, out floorHit, camRayLength, floorMask))
+			{
+				Vector3 playerToMouse = floorHit.point - player1RigidBody.transform.position;
+				playerToMouse.y = 0f;
+
+				Quaternion newRotation = Quaternion.LookRotation(playerToMouse);
+				player1RigidBody.MoveRotation(newRotation);
+			}
+
+			player2Rigidbody = spawnPlayer2.player2.GetComponent<Rigidbody>();
+
+			RotationSpeed = 1f;
+
+			spawnPlayer2.player2.transform.Rotate(0, Input.GetAxis("TurnRight") * RotationSpeed, 0);
 		}
 	}
 

@@ -2,11 +2,10 @@
 
 public class GameOverManager : MonoBehaviour
 {
-    public SpawnPlayer2 spawnPlayer2;
-    public Player2Health player2Health;
     public PlayerHealth playerHealth;
+    Player2Health player2Health;
 	public float restartDelay = 5f;
-
+    public SpawnPlayer2 spawnPlayer2;
 
     Animator anim;
 	float restartTimer;
@@ -20,9 +19,8 @@ public class GameOverManager : MonoBehaviour
 
     void Update()
     {
-        if (playerHealth.currentHealth <= 0 && spawnPlayer2.isPlayer2Active == false)
+        if (playerHealth.currentHealth <= 0 && spawnPlayer2.player2 == null)
         {
-            Debug.Log("1");
             anim.SetTrigger("GameOver");
 
 			restartTimer += Time.deltaTime;
@@ -31,17 +29,21 @@ public class GameOverManager : MonoBehaviour
 				Application.LoadLevel(Application.loadedLevel);
 			}
         }
-        
-        else if(playerHealth.currentHealth <= 0 && player2Health.currentHealth <= 0)
+
+        else if(spawnPlayer2.player2 != null)
         {
-            Debug.Log("2");
-            anim.SetTrigger("GameOver");
+            player2Health = spawnPlayer2.player2.GetComponent<Player2Health>();
 
-            restartTimer += Time.deltaTime;
-
-            if (restartTimer >= restartDelay)
+            if (playerHealth.currentHealth <= 0 && player2Health.currentHealth <= 0)
             {
-                Application.LoadLevel(Application.loadedLevel);
+                anim.SetTrigger("GameOver");
+
+                restartTimer += Time.deltaTime;
+
+                if (restartTimer >= restartDelay)
+                {
+                    Application.LoadLevel(Application.loadedLevel);
+                }
             }
         }
     }
